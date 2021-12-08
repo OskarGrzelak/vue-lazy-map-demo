@@ -1,26 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <map-static
+      v-if="!isInteractive"
+      :map="map"
+      @setInteractive="setInteractive"
+    ></map-static>
+    <map-interactive v-else></map-interactive>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MapStatic from './components/MapStatic.vue'
+import MapInteractive from './components/MapInteractive.vue'
+import mapImg from './assets/static-map.png'
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    MapStatic,
+    MapInteractive,
+  },
+  data() {
+    return {
+      map: mapImg,
+      isInteractive: false,
+    }
+  },
+  methods: {
+    setInteractive() {
+      this.isInteractive = true
+    },
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
